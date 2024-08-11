@@ -12,6 +12,7 @@ public unsafe class SteamApi64 : ISteamApi
     public int GetHSteamUser() => GetHSteamUserImport();
     public void* FindOrCreateInterface(int hSteamUser, string interfaceName) => FindOrCreateInterfaceImport(hSteamUser, interfaceName);
     public byte* GetCurrentGameLanguage(SteamApi.ISteamApps* steamApps) => GetCurrentGameLanguageImport(steamApps);
+    public bool ApiInit() => ApiInitImport();
 
     [DllImport(STEAM_API_DLL, CallingConvention = CallingConvention.Cdecl, EntryPoint = SteamApi.GetHUserName)]
     private static extern int GetHSteamUserImport();
@@ -22,4 +23,6 @@ public unsafe class SteamApi64 : ISteamApi
     [DllImport(STEAM_API_DLL, CallingConvention = CallingConvention.Cdecl, EntryPoint = SteamApi.GetCurrentGameLanguageName)]
     private static extern byte* GetCurrentGameLanguageImport(SteamApi.ISteamApps* steamApps);
 
+    [DllImport(STEAM_API_DLL, CallingConvention = CallingConvention.Cdecl, EntryPoint = SteamApi.InitName)]
+    private static extern bool ApiInitImport();
 }

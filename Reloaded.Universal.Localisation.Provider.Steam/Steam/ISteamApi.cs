@@ -9,4 +9,6 @@ public unsafe interface ISteamApi
     public void* FindOrCreateInterface(int hSteamUser, string interfaceName);
     
     public byte* GetCurrentGameLanguage(SteamApi.ISteamApps* steamApps);
+
+    public bool ApiInit();
 }

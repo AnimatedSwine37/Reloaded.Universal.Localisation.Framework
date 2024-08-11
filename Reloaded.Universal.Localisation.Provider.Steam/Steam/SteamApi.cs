@@ -13,8 +13,6 @@ public unsafe class SteamApi
     public const string GetCurrentGameLanguageName = "SteamAPI_ISteamApps_GetCurrentGameLanguage";
 
     private ISteamApi? _steamApi;
-    private IHook<SteamApiInitDelegate> _steamApiInitHook;
-    private Action _apiInitialised;
     
     /// <summary>
     /// Checks whether the steam api could be loaded
@@ -25,9 +23,7 @@ public unsafe class SteamApi
     /// <summary>
     /// Creates a new steam api interface
     /// </summary>
-    /// <param name="hooks">A reloaded hooks instance</param>
-    /// <param name="apiInitialised">An action that will be called when steam's api finishes initialisng</param>
-    public SteamApi(IReloadedHooks hooks, Action apiInitialised)
+    public SteamApi()
     {
         if (Environment.Is64BitProcess)
         {
@@ -49,8 +45,11 @@ public unsafe class SteamApi
             return;
         }
         
-        _apiInitialised = apiInitialised;
-        HookInit(hooks);
+        if (!_steamApi.ApiInit())
+        {
+            LogError("Failed to initialise steam api, not providing languages.");
+            _steamApi = null;
+        }
     }
     
     /// <summary>
@@ -76,35 +75,6 @@ public unsafe class SteamApi
         return Marshal.PtrToStringAnsi((nint)language);
     }
 
-    private void HookInit(IReloadedHooks hooks)
-    {
-        var apiHandle = Kernel32.GetModuleHandle(_steamApi.SteamApiDll);
-        if (apiHandle == IntPtr.Zero)
-        {
-            LogError("Unable to find steam api, init will not be hooked and languages will not be provided!");
-            return;
-        }
-        var initAddress = Kernel32.GetProcAddress(apiHandle, InitName);
-        if (initAddress == IntPtr.Zero)
-        {
-            LogError("Unable to find steam api init, languages will not be provided!");
-            return;
-        }
-        
-        _steamApiInitHook = hooks.CreateHook<SteamApiInitDelegate>(SteamApiInit, initAddress).Activate();
-    }
-
-    private bool SteamApiInit()
-    {
-        var initialised = _steamApiInitHook.OriginalFunction();
-        if(initialised) _apiInitialised();
-        return initialised;
-    }
-
-    [Hooks.Definitions.X64.Function(Hooks.Definitions.X64.CallingConventions.Microsoft)]
-    [Hooks.Definitions.X86.Function(Hooks.Definitions.X86.CallingConventions.Cdecl)]
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    private delegate bool SteamApiInitDelegate();
 
     public struct ISteamApps
     {

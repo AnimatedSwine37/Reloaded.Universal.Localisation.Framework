@@ -60,7 +60,7 @@ public class Mod : ModBase // <= Do not Remove.
 
         Initialise(_logger);
 
-        _steamApi = new SteamApi(_hooks, SteamApiInitialised);
+        _steamApi = new SteamApi();
         if (!_steamApi.IsLoaded)
         {
             LogError("Steam API could not be loaded, no language will be provided.");
@@ -74,14 +74,13 @@ public class Mod : ModBase // <= Do not Remove.
             LogError(
                 $"Unable to get controller for Localisation Framework, steam game languages will not be available.");
         }
+        
+        SetupLanguage();
     }
 
-    private void SteamApiInitialised()
+    private void SetupLanguage()
     {
-        if(_localisationFramework == null)
-            return;
-        
-        Log("Steam API initialised, trying to get language.");
+        Log("Trying to get language.");
 
         var languageStr = _steamApi.GetGameLanguage();
         if (languageStr == null)
@@ -96,7 +95,7 @@ public class Mod : ModBase // <= Do not Remove.
             LogError($"Failed parse language {languageStr} from Steam API.");
         }
 
-        _localisationFramework.SetLanguage(language);
+        _localisationFramework!.SetLanguage(language);
     }
 
     #region Standard Overrides
