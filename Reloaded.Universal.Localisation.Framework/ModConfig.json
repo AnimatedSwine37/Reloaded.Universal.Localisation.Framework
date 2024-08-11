@@ -16,7 +16,7 @@
   "IsUniversalMod": true,
   "ModDependencies": [
     "reloaded.sharedlib.hooks",
-    "Reloaded.Memory.SigScan.ReloadedII"
+    "reloaded.universal.fileemulationframework"
   ],
   "OptionalDependencies": [],
   "SupportedAppId": [],

@@ -1,7 +1,11 @@
-﻿using Reloaded.Hooks.ReloadedII.Interfaces;
+﻿using System.Diagnostics;
+using FileEmulationFramework.Interfaces;
+using Reloaded.Hooks.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
+using Reloaded.Mod.Interfaces.Internal;
 using Reloaded.Universal.Localisation.Framework.Template;
 using Reloaded.Universal.Localisation.Framework.Configuration;
+using Reloaded.Universal.Localisation.Framework.FileEmulator;
 using Reloaded.Universal.Localisation.Framework.Interfaces;
 
 using static Reloaded.Universal.Localisation.Framework.Utils;
@@ -45,6 +49,8 @@ public class Mod : ModBase, IExports // <= Do not Remove.
     private readonly IModConfig _modConfig;
 
     private ILocalisationFramework _api;
+    
+    private LocalisationEmulator _localisationEmulator;
 
     public Mod(ModContext context)
     {
@@ -56,30 +62,26 @@ public class Mod : ModBase, IExports // <= Do not Remove.
         _modConfig = context.ModConfig;
 
         Initialise(_logger, _configuration);
-        _api = new Api();
+        
+        _localisationEmulator = new LocalisationEmulator();
+        _modLoader.GetController<IEmulationFramework>().TryGetTarget(out var framework);
+        framework!.Register(_localisationEmulator);
+        
+        _api = new Api(_localisationEmulator);
 
         // Expose API
         _modLoader.AddOrReplaceController(context.Owner, _api);
-        _modLoader.OnModLoaderInitialized += ModLoaderInitialised;
+        _modLoader.OnModLoaderInitialized += OnModLoaderInitialised;
+        _modLoader.ModLoading += OnModLoading;
     }
 
-    private void ModLoaderInitialised()
+    private void OnModLoaderInitialised()
     {
-        Task.Run(() =>
-        {
-            Thread.Sleep(3000);
-            // TODO actually do all of the file redirection and stuff
-            if (_api.TryGetLanguage(out var language))
-            {
-                Log($"Language for the game is {language.Name}");
-            }
-            else
-            {
-                Log("Unable to determine language for the game.");
-            }
-        });
-
+        _modLoader.ModLoading -= OnModLoading;
+        _modLoader.OnModLoaderInitialized -= OnModLoaderInitialised;
     }
+    
+    private void OnModLoading(IModV1 mod, IModConfigV1 modConfig) => _localisationEmulator.OnModLoading(_modLoader.GetDirectoryForModId(modConfig.ModId));
 
     #region Standard Overrides
 
