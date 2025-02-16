@@ -36,7 +36,37 @@ public class LocalisationBuilderFactory
             }
         }
     }
+    
+    /// <summary>
+    /// Adds all available routes from a folder for a particular language.
+    /// </summary>
+    /// <param name="redirectorFolder">Folder containing the redirector's files.</param>
+    /// <param name="baseFolder">The folder that files should be redirected from</param>
+    /// <param name="language">The language that the files in this folder are in</param>
+    public void AddFromFolders(string redirectorFolder, string baseFolder, Language language)
+    {
+        // Get contents.
+        WindowsDirectorySearcher.GetDirectoryContentsRecursiveGrouped(redirectorFolder, out var groups);
 
+        // Find matching folders.
+        foreach (var group in groups)
+        {
+            foreach (var file in group.Files)
+            {
+                var filePath = $@"{group.Directory.FullPath}\{file}";
+                var route = Route.GetRoute(redirectorFolder, filePath);
+                AddFile(filePath, route, language.Id, baseFolder);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Adds a file to the builder factory
+    /// </summary>
+    /// <param name="filePath">The path to the file</param>
+    /// <param name="route">The route to the file</param>
+    /// <param name="languageId">The ID of the language that the file is in</param>
+    /// <param name="baseFolder">The path to the base folder that the file can be used for redirections in (the owner mod's base folder)</param>
     public void AddFile(string filePath, string route, string languageId, string baseFolder)
     {
         if (!RouteFileTuples.ContainsKey(baseFolder))

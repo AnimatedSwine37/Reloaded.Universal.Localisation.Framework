@@ -93,34 +93,45 @@ public class LocalisationEmulator : IEmulator
         if (Directory.Exists(redirectorFolder))
             _builderFactory.AddFromFolders(redirectorFolder, modFolder);
     }
-
-    /// <summary>
-    /// Invalidates a file with a specified name.
-    /// </summary>
-    /// <param name="path">Full path to the file.</param>
-    public void UnregisterFile(string path)
-    {
-        _pathToLocalised.Remove(path, out var localised);
-        localised?.Stream.Dispose();
-    }
-
-    /// <summary>
-    /// Registers a file
-    /// </summary>
-    /// <param name="destinationPath">Full path to the destination</param>
-    /// <param name="stream">Stream of the emulated file</param>
-    /// <param name="lastWrite">The last write time of the file</param>
-    public void RegisterFile(string destinationPath, Stream stream, DateTime lastWrite)
-    {
-        _pathToLocalised.TryAdd(destinationPath, new LocalisedFile(stream, lastWrite));
-    }
-
-    // TODO implement
-    // internal List<RouteGroupTuple> GetInput() => _builderFactory.RouteFileTuples;
-    //
-    // internal void AddFromFolders(string dir) => _builderFactory.AddFromFolders(dir);
-
-    // internal void AddFile(string file, string route) => _builderFactory.AddFile(Path.GetFileName(file), file, Path.GetDirectoryName(file)!, route);
     
+    /// <summary>
+    /// Adds a file to be used for localisation
+    /// </summary>
+    /// <param name="file">The path to the file</param>
+    /// <param name="route">The route to the file</param>
+    /// <param name="modDir">The base directory of the mod that the file is for</param>
+    /// <param name="language">The language that the file is in</param>
+    public void AddFile(string file, string route, string modDir, Language language)
+    {
+        _builderFactory.AddFile(file, route, language.Id, modDir);
+    }
+
+    /// <summary>
+    /// Adds a directory to Localisation Framework so it's like the files were in FEmulator\L10N.
+    /// There must be appropriate language subfolders in the spcified path, such as `{dir}\ja\...` for Japanese files. 
+    /// </summary>
+    /// <param name="dir">The directory to add the files from</param>
+    /// <param name="modDir">The base directory to the mod that the localised files are for</param>
+    public void AddDirectory(string dir, string modDir)
+    {
+        _builderFactory.AddFromFolders(dir, modDir);
+    }
+    
+    /// <summary>
+    /// Adds a directory to Localisation Framework so it's like the files were in FEmulator\L10N\{language}
+    /// </summary>
+    /// <param name="dir">The directory to add the files from</param>
+    /// <param name="modDir">The base directory to the mod that the localised files are for</param>
+    /// <param name="language">The language that the files in this folder are in</param>
+    public void AddDirectory(string dir, string modDir, Language language)
+    {
+        _builderFactory.AddFromFolders(dir, modDir, language);
+    }
+    
+    /// <summary>
+    /// Sets the current language of the emulator
+    /// </summary>
+    /// <param name="language">The new language for the emulator</param>
     internal void SetLanguage(Language language) => _gameLanguage = language;
+    
 }

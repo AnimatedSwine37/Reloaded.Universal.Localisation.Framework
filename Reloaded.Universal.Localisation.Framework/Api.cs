@@ -39,4 +39,19 @@ public class Api: ILocalisationFramework
 
         return _emulator.CanCreateLocalisedFile(filePath);
     }
+
+    public void AddFile(string file, string route, string modDir, Language language)
+    {
+        _emulator.AddFile(file, route, modDir, language);
+    }
+
+    public void AddDirectory(string dir, string baseFolder)
+    {
+        _emulator.AddDirectory(dir, baseFolder);
+    }
+
+    public void AddDirectory(string dir, string baseFolder, Language language)
+    {
+        _emulator.AddDirectory(dir, baseFolder, language);
+    }
 }
