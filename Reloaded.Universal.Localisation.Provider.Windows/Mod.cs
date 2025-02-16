@@ -1,21 +1,17 @@
-﻿using System.Diagnostics;
-using FileEmulationFramework.Interfaces;
+﻿using System.Globalization;
 using Reloaded.Hooks.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
-using Reloaded.Mod.Interfaces.Internal;
-using Reloaded.Universal.Localisation.Framework.Template;
-using Reloaded.Universal.Localisation.Framework.Configuration;
-using Reloaded.Universal.Localisation.Framework.FileEmulator;
 using Reloaded.Universal.Localisation.Framework.Interfaces;
+using Reloaded.Universal.Localisation.Provider.Windows.Template;
+using Reloaded.Universal.Localisation.Provider.Windows.Configuration;
+using static Reloaded.Universal.Localisation.Provider.Windows.Utils;
 
-using static Reloaded.Universal.Localisation.Framework.Utils;
-
-namespace Reloaded.Universal.Localisation.Framework;
+namespace Reloaded.Universal.Localisation.Provider.Windows;
 
 /// <summary>
 /// Your mod logic goes here.
 /// </summary>
-public class Mod : ModBase, IExports // <= Do not Remove.
+public class Mod : ModBase // <= Do not Remove.
 {
     /// <summary>
     /// Provides access to the mod loader API.
@@ -48,13 +44,10 @@ public class Mod : ModBase, IExports // <= Do not Remove.
     /// </summary>
     private readonly IModConfig _modConfig;
 
-    private ILocalisationFramework _api;
-    
-    private LocalisationEmulator _localisationEmulator;
+    private ILocalisationFramework _localisationFramework;
 
     public Mod(ModContext context)
     {
-        // Debugger.Launch();
         _modLoader = context.ModLoader;
         _hooks = context.Hooks;
         _logger = context.Logger;
@@ -62,27 +55,32 @@ public class Mod : ModBase, IExports // <= Do not Remove.
         _configuration = context.Configuration;
         _modConfig = context.ModConfig;
 
-        Initialise(_logger, _configuration);
-        
-        _localisationEmulator = new LocalisationEmulator();
-        _modLoader.GetController<IEmulationFramework>().TryGetTarget(out var framework);
-        framework!.Register(_localisationEmulator);
-        
-        _api = new Api(_localisationEmulator);
+        Initialise(_logger);
 
-        // Expose API
-        _modLoader.AddOrReplaceController(context.Owner, _api);
-        _modLoader.OnModLoaderInitialized += OnModLoaderInitialised;
-        _modLoader.ModLoading += OnModLoading;
-    }
+        var localisationFrameworkController = _modLoader.GetController<ILocalisationFramework>();
+        if (localisationFrameworkController == null ||
+            !localisationFrameworkController.TryGetTarget(out _localisationFramework))
+        {
+            LogError(
+                $"Unable to get controller for Localisation Framework, windows language will not be available.");
+            return;
+        }
 
-    private void OnModLoaderInitialised()
-    {
-        _modLoader.ModLoading -= OnModLoading;
-        _modLoader.OnModLoaderInitialized -= OnModLoaderInitialised;
+        if (_localisationFramework.TryGetLanguage(out var currentLanguage))
+        {
+            Log($"Language is already set to {currentLanguage.Name}, not providing windows language.");
+            return;
+        }
+
+        var culture = CultureInfo.CurrentUICulture;
+        if (!WindowsLanguage.TryParseLanguage(culture, out var language))
+        {
+            LogError($"Unable to parse culture {culture.Name} to a localisation language. Windows language will not be available.");
+            return;
+        }
+        
+        _localisationFramework.SetLanguage(language!);
     }
-    
-    private void OnModLoading(IModV1 mod, IModConfigV1 modConfig) => _localisationEmulator.OnModLoading(_modLoader.GetDirectoryForModId(modConfig.ModId));
 
     #region Standard Overrides
 
@@ -105,6 +103,4 @@ public class Mod : ModBase, IExports // <= Do not Remove.
 #pragma warning restore CS8618
 
     #endregion
-
-    public Type[] GetTypes() => new[] { typeof(ILocalisationFramework) };
 }

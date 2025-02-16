@@ -1,6 +1,7 @@
 using System.Text.Json;
 using FileEmulationFramework.Lib;
 using FileEmulationFramework.Lib.IO;
+using Reloaded.Universal.Localisation.Framework.Interfaces;
 
 namespace Reloaded.Universal.Localisation.Framework.FileEmulator;
 
@@ -83,6 +84,34 @@ public class LocalisationBuilderFactory
         }
 
         return builder != null;
+    }
+
+    /// <summary>
+    /// Checks if a localised version of a file can be created.
+    /// This does not actually create anything.
+    /// </summary>
+    /// <param name="path">The full path to the file</param>
+    /// <param name="language">The language the localised file should be in</param>
+    /// <returns>True if a localised version of the file in the specified language can be created, false otherwise.</returns>
+    public bool CanCreateFromPath(string path, Language language)
+    {
+        var route = new Route(path);
+        foreach (var (baseDir, routeGroupTuples) in RouteFileTuples)
+        {
+            if (!route.FullPath.Contains(baseDir))
+                continue;
+
+            foreach (var group in routeGroupTuples)
+            {
+                if (!route.Matches(group.Route.FullPath) || route.FullPath.Equals(group.File))
+                    continue;
+
+                if (group.LanguageId == language.Id)
+                    return true;
+            }
+        }
+
+        return false;
     }
 }
 

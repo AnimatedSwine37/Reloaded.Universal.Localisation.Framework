@@ -16,6 +16,11 @@ public class Api: ILocalisationFramework
 
     public void SetLanguage(Language language)
     {
+        if (language == null)
+        {
+            Utils.LogError("Cannot set language to null. Changing nothing.");
+            return;
+        }
         Utils.Log($"Set language to {language.Name}");
         _language = language;
         _emulator.SetLanguage(language);
@@ -25,5 +30,13 @@ public class Api: ILocalisationFramework
     {
         language = _language;
         return language != null;
+    }
+
+    public bool IsFileLocalised(string filePath)
+    {
+        if (_language == null)
+            return false;
+
+        return _emulator.CanCreateLocalisedFile(filePath);
     }
 }

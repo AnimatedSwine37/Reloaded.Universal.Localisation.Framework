@@ -1,3 +1,5 @@
+using FileEmulationFramework.Interfaces;
+using FileEmulationFramework.Interfaces.Reference;
 using Reloaded.Universal.Localisation.Framework.Interfaces;
 
 namespace Reloaded.Universal.Localisation.Framework.FileEmulator;
@@ -25,8 +27,8 @@ public class LocalisationBuilder
     /// </summary>
     /// <param name="language">The language the localised file should be in</param>
     /// <param name="srcFilePath">The path to the file that is being localised</param>
-    /// <returns>A stream of the localised file or null if one couldn't be built</returns>
-    public Stream? Build(Language language, string srcFilePath)
+    /// <returns>A localised file or null if one couldn't be built</returns>
+    public LocalisedFile? Build(Language language, string srcFilePath)
     {
         if (!_localisedFiles.TryGetValue(language.Id, out var localisedPath))
             return null;
@@ -35,6 +37,7 @@ public class LocalisationBuilder
             return null;
 
         Utils.Log($"Using {language.Name} file {localisedPath} for {srcFilePath}");
-        return new FileStream(localisedPath, FileMode.Open);
+        var stream = new FileStream(localisedPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
+        return new LocalisedFile(stream, File.GetLastWriteTimeUtc(localisedPath));
     }
 }

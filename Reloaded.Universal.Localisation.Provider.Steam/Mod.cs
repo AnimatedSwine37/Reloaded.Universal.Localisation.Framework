@@ -73,6 +73,7 @@ public class Mod : ModBase // <= Do not Remove.
         {
             LogError(
                 $"Unable to get controller for Localisation Framework, steam game languages will not be available.");
+            return;
         }
         
         SetupLanguage();
@@ -88,14 +89,15 @@ public class Mod : ModBase // <= Do not Remove.
             LogError("Failed to get language from Steam API.");
             return;
         }
-
+        
         Log($"Steam game language is {languageStr}");
-        if (!Language.TryGetByName(languageStr, out var language))
+        if (!SteamLanguage.TryParseLanguage(languageStr, out var language))
         {
             LogError($"Failed parse language {languageStr} from Steam API.");
+            return;
         }
 
-        _localisationFramework!.SetLanguage(language);
+        _localisationFramework!.SetLanguage(language!);
     }
 
     #region Standard Overrides
