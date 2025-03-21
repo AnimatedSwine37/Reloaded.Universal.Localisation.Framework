@@ -35,7 +35,7 @@ You'd make your routes more specific so both `names.txt` don't get replaced with
 ### API
 If you're making a code mod you can access Localisation Framework's API to get the game's language in your code, provide additional localised versions of files, or create your own language provider (see [Creating A Language Provider](#creating-a-language-provider)).
 
-First, you'll need to add the `Reloaded.Universal.Localisation.Framework.Interfaces` NuGet package to your mod's project. If you don't know how to add NuGet packages, look it up online. Most IDEs will have built-in support.
+First, you'll need to add the [Reloaded.Universal.Localisation.Framework.Interfaces NuGet package](https://www.nuget.org/packages/Reloaded.Universal.Localisation.Framework.Interfaces/) to your mod's project. If you don't know how to add NuGet packages, look it up online. Most IDEs will have built-in support.
 
 Next, add a dependency on `Reloaded.Universal.Localisation.Framework` to the `ModDependencies` section of your `ModConfig.json` file.
 
