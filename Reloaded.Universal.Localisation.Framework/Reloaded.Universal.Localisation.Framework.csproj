@@ -49,9 +49,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\FileEmulationFramework\FileEmulationFramework.Interfaces\FileEmulationFramework.Interfaces.csproj" />
-      <ProjectReference Include="..\..\FileEmulationFramework\FileEmulationFramework.Lib\FileEmulationFramework.Lib.csproj" />
       <ProjectReference Include="..\Reloaded.Universal.Localisation.Framework.Interfaces\Reloaded.Universal.Localisation.Framework.Interfaces.csproj" />
+      <ProjectReference Include="..\Submodules\FileEmulationFramework\FileEmulationFramework.Interfaces\FileEmulationFramework.Interfaces.csproj" />
+      <ProjectReference Include="..\Submodules\FileEmulationFramework\FileEmulationFramework.Lib\FileEmulationFramework.Lib.csproj" />
     </ItemGroup>
 
 </Project>

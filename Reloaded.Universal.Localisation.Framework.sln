@@ -12,9 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodules", "Submodules", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reloaded.Universal.Localisation.Provider.Windows", "Reloaded.Universal.Localisation.Provider.Windows\Reloaded.Universal.Localisation.Provider.Windows.csproj", "{F7EEB1F2-AFE0-477A-93CD-205B783AB48A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileEmulationFramework.Interfaces", "..\FileEmulationFramework\FileEmulationFramework.Interfaces\FileEmulationFramework.Interfaces.csproj", "{E1C9FDFD-B23B-4A7F-83A6-488ED66ACC7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileEmulationFramework.Interfaces", "Submodules\FileEmulationFramework\FileEmulationFramework.Interfaces\FileEmulationFramework.Interfaces.csproj", "{EE06D3B2-34E9-4B12-90AA-A7531889F955}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileEmulationFramework.Lib", "..\FileEmulationFramework\FileEmulationFramework.Lib\FileEmulationFramework.Lib.csproj", "{A05F1F33-0259-46C1-B807-913EA7D92537}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileEmulationFramework.Lib", "Submodules\FileEmulationFramework\FileEmulationFramework.Lib\FileEmulationFramework.Lib.csproj", "{E265A51F-2F46-4288-AAD1-861849A35262}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,19 +38,19 @@ Global
 		{F7EEB1F2-AFE0-477A-93CD-205B783AB48A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7EEB1F2-AFE0-477A-93CD-205B783AB48A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7EEB1F2-AFE0-477A-93CD-205B783AB48A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1C9FDFD-B23B-4A7F-83A6-488ED66ACC7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1C9FDFD-B23B-4A7F-83A6-488ED66ACC7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1C9FDFD-B23B-4A7F-83A6-488ED66ACC7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1C9FDFD-B23B-4A7F-83A6-488ED66ACC7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A05F1F33-0259-46C1-B807-913EA7D92537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A05F1F33-0259-46C1-B807-913EA7D92537}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A05F1F33-0259-46C1-B807-913EA7D92537}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A05F1F33-0259-46C1-B807-913EA7D92537}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE06D3B2-34E9-4B12-90AA-A7531889F955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE06D3B2-34E9-4B12-90AA-A7531889F955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE06D3B2-34E9-4B12-90AA-A7531889F955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE06D3B2-34E9-4B12-90AA-A7531889F955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E265A51F-2F46-4288-AAD1-861849A35262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E265A51F-2F46-4288-AAD1-861849A35262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E265A51F-2F46-4288-AAD1-861849A35262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E265A51F-2F46-4288-AAD1-861849A35262}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4696B452-5ED5-4330-9103-46F5B1DCAA78} = {0F9AC63E-C614-4F1E-81BB-2C6A6A410BDA}
 		{F7EEB1F2-AFE0-477A-93CD-205B783AB48A} = {0F9AC63E-C614-4F1E-81BB-2C6A6A410BDA}
-		{E1C9FDFD-B23B-4A7F-83A6-488ED66ACC7A} = {92BB3D82-D932-4C91-A84D-D36155DA68F2}
-		{A05F1F33-0259-46C1-B807-913EA7D92537} = {92BB3D82-D932-4C91-A84D-D36155DA68F2}
+		{EE06D3B2-34E9-4B12-90AA-A7531889F955} = {92BB3D82-D932-4C91-A84D-D36155DA68F2}
+		{E265A51F-2F46-4288-AAD1-861849A35262} = {92BB3D82-D932-4C91-A84D-D36155DA68F2}
 	EndGlobalSection
 EndGlobal
