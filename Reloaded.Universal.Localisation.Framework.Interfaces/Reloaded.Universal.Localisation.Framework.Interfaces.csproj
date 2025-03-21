@@ -8,10 +8,15 @@
         <Description>Interfaces for the Reloaded Localisation Framework mod API</Description>
         <PackageProjectUrl>https://github.com/AnimatedSwine37/Reloaded.Universal.Localisation.Framework</PackageProjectUrl>
         <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/AnimatedSwine37/Reloaded.Universal.Localisation.Framework</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>reloaded</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
 
 </Project>
