@@ -93,7 +93,7 @@ For example, if you are using it on a Steam game that doesn't support French, pu
 |--------------------------|---------|
 | Arabic                   | ar      |
 | Bulgarian                | bg      |
-| Traditional Chineese     | zh-Hant |
+| Traditional Chinese      | zh-Hant |
 | Simplified Chinese       | zh-Hans |
 | Czech                    | cs      |
 | Danish                   | da      |
@@ -107,7 +107,7 @@ For example, if you are using it on a Steam game that doesn't support French, pu
 | Indonesian               | id      |
 | Italian                  | it      |
 | Japanese                 | ja      |
-| Norweegian               | no      |
+| Norwegian                | no      |
 | Polish                   | pl      |
 | Portugese                | pt      |
 | Brazilian                | pt-BR   |
