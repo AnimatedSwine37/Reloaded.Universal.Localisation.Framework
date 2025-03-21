@@ -4,6 +4,13 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Authors>AnimatedSwine37</Authors>
+        <Description>Interfaces for the Reloaded Localisation Framework mod API</Description>
+        <PackageProjectUrl>https://github.com/AnimatedSwine37/Reloaded.Universal.Localisation.Framework</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/AnimatedSwine37/Reloaded.Universal.Localisation.Framework/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/AnimatedSwine37/Reloaded.Universal.Localisation.Framework</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <PackageTags>reloaded</PackageTags>
     </PropertyGroup>
 
 </Project>

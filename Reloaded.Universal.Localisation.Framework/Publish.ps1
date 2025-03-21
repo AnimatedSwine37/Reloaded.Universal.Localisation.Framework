@@ -154,7 +154,7 @@
 param (
     $IsPrerelease=$False, 
     $MakeDelta=$False, 
-    $ChangelogPath="",
+    $ChangelogPath="CHANGELOG.md",
     $ReadmePath="",
     $Build=$True,
     $BuildR2R=$False,
