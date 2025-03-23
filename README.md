@@ -107,6 +107,7 @@ For example, if you are using it on a Steam game that doesn't support French, pu
 | Indonesian               | id      |
 | Italian                  | it      |
 | Japanese                 | ja      |
+| Korean                   | ko      |
 | Norwegian                | no      |
 | Polish                   | pl      |
 | Portugese                | pt      |
