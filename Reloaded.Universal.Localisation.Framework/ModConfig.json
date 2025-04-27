@@ -2,7 +2,7 @@
   "ModId": "Reloaded.Universal.Localisation.Framework",
   "ModName": "Localisation Framework",
   "ModAuthor": "AnimatedSwine37",
-  "ModVersion": "1.0.0",
+  "ModVersion": "1.0.1",
   "ModDescription": "A framework that helps localise mods into multiple languages",
   "ModDll": "Reloaded.Universal.Localisation.Framework.dll",
   "ModIcon": "Preview.png",
