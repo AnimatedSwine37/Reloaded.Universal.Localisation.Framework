@@ -24,8 +24,8 @@ public class LocalisationEmulator : IEmulator
         if (_gameLanguage == null)
             return false;
         
-        if (_pathToLocalised.ContainsKey(path))
-            return true;
+        if (_pathToLocalised.TryGetValue(path, out var localised))
+            return localised != null;
         
         return _builderFactory.CanCreateFromPath(path, _gameLanguage);
     }
