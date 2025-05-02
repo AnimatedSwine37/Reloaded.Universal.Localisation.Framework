@@ -30,6 +30,7 @@ public class WindowsLanguage
         { "da", Language.Danish },
         { "nl", Language.Dutch },
         { "en", Language.English },
+        { "en-GB", Language.English },
         { "fr", Language.French },
         { "fi", Language.Finnish },
         { "de", Language.German },
