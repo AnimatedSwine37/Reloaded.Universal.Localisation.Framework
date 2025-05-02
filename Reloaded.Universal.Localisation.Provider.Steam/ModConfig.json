@@ -2,7 +2,7 @@
   "ModId": "Reloaded.Universal.Localisation.Provider.Steam",
   "ModName": "Localisation Framework - Steam Support",
   "ModAuthor": "AnimatedSwine37",
-  "ModVersion": "1.0.0",
+  "ModVersion": "1.0.1",
   "ModDescription": "Allows localisation framework to check the language of Steam games",
   "ModDll": "Reloaded.Universal.Localisation.Provider.Steam.dll",
   "ModIcon": "Preview.png",

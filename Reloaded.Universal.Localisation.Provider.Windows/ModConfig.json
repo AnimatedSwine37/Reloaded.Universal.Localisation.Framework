@@ -2,7 +2,7 @@
   "ModId": "Reloaded.Universal.Localisation.Provider.Windows",
   "ModName": "Localisation Framework - Windows Support",
   "ModAuthor": "AnimatedSwine37",
-  "ModVersion": "1.0.0",
+  "ModVersion": "1.0.1",
   "ModDescription": "Allows localisation framework to check the language Windows is running in",
   "ModDll": "Reloaded.Universal.Localisation.Provider.Windows.dll",
   "ModIcon": "Preview.png",
