@@ -34,16 +34,17 @@ public unsafe class SteamApi
             _steamApi = new SteamApi32();
         }
 
-        try
-        {
-            _steamApi.GetHSteamUser();
-        }
-        catch (DllNotFoundException)
+        var steamLibrary = Kernel32.LoadLibrary(_steamApi.SteamApiDll);
+        if (steamLibrary == IntPtr.Zero)
         {
             Log("Failed to load steam api, not providing languages.");
             _steamApi = null;
             return;
         }
+        
+        // Clean up after ourselves (if the library was already loaded by the game,
+        // it will stay loaded. This just decrements an internal counter so it can be unloaded later)
+        Kernel32.FreeLibrary(_steamApi.SteamApiDll);
         
         if (!_steamApi.ApiInit())
         {
